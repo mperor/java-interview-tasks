@@ -25,8 +25,7 @@ public class SearchingChallengeTest {
         var tokenChars = INTERSPERSE_CHALLENGE_TOKEN.toCharArray();
         int commonSize = Math.min(word.length(), INTERSPERSE_CHALLENGE_TOKEN.length());
         for (int i = 0; i < commonSize; i++) {
-            sb.append(wordChars[i]);
-            sb.append(tokenChars[i]);
+            sb.append(wordChars[i]).append(tokenChars[i]);
         }
         sb.append(word.substring(commonSize));
         sb.append(INTERSPERSE_CHALLENGE_TOKEN.substring(commonSize));
