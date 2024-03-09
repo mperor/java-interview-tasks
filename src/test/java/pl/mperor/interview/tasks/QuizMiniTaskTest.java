@@ -3,9 +3,16 @@ package pl.mperor.interview.tasks;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -87,12 +94,49 @@ public class QuizMiniTaskTest {
             return sb.toString();
         };
         assertEquals("3w1e1g2w1h", textProcessor.apply("wwwegwwh"));
+        assertEquals("3w2g1o2p", textProcessor.apply("wwwggopp"));
 
         String actual = Pattern.compile("(?<=(.))(?!\\1)")
                 .splitAsStream("wwwegwwh")
                 .map(s -> s.length() + s.substring(0, 1))
                 .collect(Collectors.joining());
         assertEquals("3w1e1g2w1h", actual);
+    }
+
+    @Test
+    public void calculateMinutesBetweenTimeRange() {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
+
+        Function<String, Duration> timeRangeCalculator = input -> {
+            Iterator<LocalTime> it = Arrays.stream(input.split("-"))
+                    .map(String::toUpperCase)
+                    .map(text -> LocalTime.parse(text, timeFormatter))
+                    .iterator();
+
+            var first = it.hasNext() ? it.next() : LocalTime.MIN;
+            var second = it.hasNext() ? it.next() : LocalTime.MIN;
+
+            Duration between = Duration.between(first, second);
+            return between.isNegative() ? Duration.between(LocalTime.MIDNIGHT, LocalTime.MIDNIGHT.plusSeconds(between.toSeconds())) : between;
+        };
+
+        assertEquals(Duration.ofMinutes(540), timeRangeCalculator.apply("11:00am-8:00pm"));
+        assertEquals(Duration.ofMinutes(60), timeRangeCalculator.apply("9:00am-10:00am"));
+        assertEquals(Duration.ofMinutes(1425), timeRangeCalculator.apply("1:23am-1:08am"));
+        assertEquals(Duration.ofMinutes(1320), timeRangeCalculator.apply("1:00pm-11:00am"));
+    }
+
+    @Test
+    public void testFactorial() {
+        UnaryOperator<Long> factorial = n -> LongStream.range(1, n + 1)
+                .reduce(1L, (left, right) -> left * right);
+
+        assertEquals(1L, factorial.apply(0L));
+        assertEquals(1L, factorial.apply(1L));
+        assertEquals(2L, factorial.apply(2L));
+        assertEquals(6L, factorial.apply(3L));
+        assertEquals(24L, factorial.apply(4L));
+        assertEquals(120L, factorial.apply(5L));
     }
 
 }
