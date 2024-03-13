@@ -7,14 +7,17 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class QuizMiniTaskTest {
 
@@ -127,7 +130,7 @@ public class QuizMiniTaskTest {
     }
 
     @Test
-    public void testFactorial() {
+    public void testFindFactorial() {
         UnaryOperator<Long> factorial = n -> LongStream.range(1, n + 1)
                 .reduce(1L, (left, right) -> left * right);
 
@@ -137,6 +140,69 @@ public class QuizMiniTaskTest {
         assertEquals(6L, factorial.apply(3L));
         assertEquals(24L, factorial.apply(4L));
         assertEquals(120L, factorial.apply(5L));
+    }
+
+    @Test
+    public void testReverseString() {
+        UnaryOperator<String> builderReverser = string -> new StringBuilder(string).reverse().toString();
+        UnaryOperator<String> charsReverser = string -> {
+            char[] chars = string.toCharArray();
+            int left = 0;
+            int right = chars.length - 1;
+            while (left < right) {
+                char tmp = chars[left];
+                chars[left] = chars[right];
+                chars[right] = tmp;
+                right--;
+                left++;
+            }
+            return String.valueOf(chars);
+        };
+        UnaryOperator<String> unicodeSafeReverser = string -> {
+            List<String> chars = string.codePoints()
+                    .mapToObj(codePoint -> String.valueOf(Character.toChars(codePoint)))
+                    .collect(Collectors.toList());
+
+            Collections.reverse(chars);
+            return chars.stream().collect(Collectors.joining());
+        };
+
+        assertEquals("cba", builderReverser.apply("abc"));
+        assertEquals("cba", charsReverser.apply("abc"));
+        assertEquals("sdrawkcab ekil skool txet siht woh rednow I", builderReverser.apply("I wonder how this text looks like backwards"));
+        assertEquals("sdrawkcab ekil skool txet siht woh rednow I", charsReverser.apply("I wonder how this text looks like backwards"));
+        assertEquals("👶👧👩👵💀🤖", unicodeSafeReverser.apply("🤖💀👵👩👧👶"));
+    }
+
+    @Test
+    public void testFindLargestNumberInArray() {
+        Function<int[], Integer> largestNumberFinder = array -> Arrays.stream(array).max().orElse(-1);
+
+        assertEquals(-1, largestNumberFinder.apply(new int[0]));
+        assertEquals(5, largestNumberFinder.apply(new int[]{3, 2, 1, 5}));
+    }
+
+    @Test
+    public void testIsPrimeNumber() {
+        Predicate<Integer> primeNumberChecker = number -> {
+            for (int i = 2; i * i <= number; i++) {
+                if (number % i == 0)
+                    return false;
+            }
+
+            return true;
+        };
+
+        assertTrue(primeNumberChecker.test(2));
+        assertTrue(primeNumberChecker.test(3));
+        assertTrue(primeNumberChecker.test(5));
+        assertTrue(primeNumberChecker.test(7));
+        assertTrue(primeNumberChecker.test(19));
+        assertTrue(primeNumberChecker.test(23));
+
+        assertFalse(primeNumberChecker.test(4));
+        assertFalse(primeNumberChecker.test(18));
+        assertFalse(primeNumberChecker.test(135));
     }
 
 }
