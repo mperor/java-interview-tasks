@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
@@ -203,6 +200,19 @@ public class QuizMiniTaskTest {
         assertFalse(primeNumberChecker.test(4));
         assertFalse(primeNumberChecker.test(18));
         assertFalse(primeNumberChecker.test(135));
+    }
+
+    @Test
+    public void testRemoveDuplicatesFromArray() {
+        UnaryOperator<int[]> distinctStreamRemover = numbers -> Arrays.stream(numbers).distinct().toArray();
+        UnaryOperator<int[]> setRemover = numbers -> new LinkedHashSet<>(Arrays.stream(numbers).boxed().collect(Collectors.toList()))
+                .stream().mapToInt(Integer::intValue).toArray();
+
+        assertArrayEquals(new int[]{1}, distinctStreamRemover.apply(new int[]{1, 1, 1, 1}));
+        assertArrayEquals(new int[]{1, 2, 3}, distinctStreamRemover.apply(new int[]{1, 2, 3, 3, 2, 1}));
+
+        assertArrayEquals(new int[]{1}, setRemover.apply(new int[]{1, 1, 1, 1}));
+        assertArrayEquals(new int[]{1, 2, 3}, setRemover.apply(new int[]{1, 2, 3, 3, 2, 1}));
     }
 
 }
