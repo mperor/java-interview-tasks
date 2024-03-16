@@ -108,15 +108,12 @@ public class QuizMiniTaskTest {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
 
         Function<String, Duration> timeRangeCalculator = input -> {
-            Iterator<LocalTime> it = Arrays.stream(input.split("-"))
+            LinkedList<LocalTime> dates = Arrays.stream(input.split("-"))
                     .map(String::toUpperCase)
                     .map(text -> LocalTime.parse(text, timeFormatter))
-                    .iterator();
+                    .collect(Collectors.toCollection(LinkedList::new));
 
-            var first = it.hasNext() ? it.next() : LocalTime.MIN;
-            var second = it.hasNext() ? it.next() : LocalTime.MIN;
-
-            Duration between = Duration.between(first, second);
+            Duration between = Duration.between(dates.getFirst(), dates.getLast());
             return between.isNegative() ? Duration.between(LocalTime.MIDNIGHT, LocalTime.MIDNIGHT.plusSeconds(between.toSeconds())) : between;
         };
 
@@ -213,6 +210,37 @@ public class QuizMiniTaskTest {
 
         assertArrayEquals(new int[]{1}, setRemover.apply(new int[]{1, 1, 1, 1}));
         assertArrayEquals(new int[]{1, 2, 3}, setRemover.apply(new int[]{1, 2, 3, 3, 2, 1}));
+    }
+
+    @Test
+    public void testFindSecondLargestNumberInArray() {
+        Function<int[], Integer> secondLargestNumberFinder = numbers -> Arrays.stream(numbers)
+                .boxed()
+                .sorted(Comparator.reverseOrder())
+                .limit(2)
+                .collect(Collectors.toCollection(LinkedList::new))
+                .getLast();
+
+        Function<int[], Integer> iterativeSecondLargestNumberFinder = numbers -> {
+            int max = Integer.MIN_VALUE;
+            int secondMax = Integer.MIN_VALUE;
+            for (int number : numbers) {
+                if (number > max) {
+                    secondMax = max;
+                    max = number;
+                } else if (number > secondMax) {
+                    secondMax = number;
+                }
+            }
+            return secondMax;
+        };
+
+
+        assertEquals(10, secondLargestNumberFinder.apply(new int[]{1, 5, 10, 20}));
+        assertEquals(-10, secondLargestNumberFinder.apply(new int[]{-1, -10}));
+
+        assertEquals(10, iterativeSecondLargestNumberFinder.apply(new int[]{1, 5, 10, 20}));
+        assertEquals(-10, iterativeSecondLargestNumberFinder.apply(new int[]{-1, -10}));
     }
 
 }
