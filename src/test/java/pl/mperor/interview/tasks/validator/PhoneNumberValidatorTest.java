@@ -7,37 +7,40 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
+/**
+ * Task: Phone Number Validation 📞
+ *
+ * <p><b>Description:</b>
+ * Your task is to create an application for validating phone numbers in Java.
+ * The application should take a phone phoneNumber as input and check if it is valid according to specified criteria.
+ *
+ * <p><b>Requirements:</b>
+ * Validation Method: Create a method that takes a phone phoneNumber as a parameter and returns a boolean value (true/false) depending on the validity of the phoneNumber.
+ *
+ * <p><b>Conditions:</b> The phone phoneNumber should meet the following conditions:
+ * Consist of exactly 9 digits.
+ * May contain only digits from 0 to 9.
+ *
+ * <p><b>Example:</b>
+ *
+ * <p>For the phone phoneNumber <b>"123456789"</b>:
+ * Calling the method <i>validatePhoneNumber("123456789")</i> should return {@code true}.
+ *
+ * <p>For the phone phoneNumber <b>"9876543210"</b>:
+ * Calling the method <i>validatePhoneNumber("9876543210")</i> should return {@code false}
+ * because this phoneNumber contains more than 9 digits.
+ *
+ * <p><b>Additional Points:</b>
+ * Support for different phone phoneNumber formats (e.g., including hyphens, parentheses, or other separators).
+ * Implementation of a simple user interface allowing to enter a phone phoneNumber and display the validation result.
+ *
+ * <p><b>Expected Points:</b>
+ * Code Quality: Is the code readable, well-formatted, and understandable?
+ * Correctness: Does the application correctly validate phone numbers according to the requirements?
+ * Flexibility: Does the application support different phone phoneNumber formats?
+ */
 class PhoneNumberValidatorTest {
 
-
-    /**
-     * Task: Phone Number Validation 📞
-     * <p>
-     * Description:
-     * Your task is to create an application for validating phone numbers in Java.
-     * The application should take a phone phoneNumber as input and check if it is valid according to specified criteria.
-     * <p>
-     * Requirements:
-     * Validation Method: Create a method that takes a phone phoneNumber as a parameter and returns a boolean value (true/false) depending on the validity of the phoneNumber.
-     * Conditions: The phone phoneNumber should meet the following conditions:
-     * <p>
-     * Consist of exactly 9 digits.
-     * May contain only digits from 0 to 9.
-     * Example:
-     * For the phone phoneNumber "123456789":
-     * Calling the method validatePhoneNumber("123456789") should return true.
-     * For the phone phoneNumber "9876543210":
-     * Calling the method validatePhoneNumber("9876543210") should return false because this phoneNumber contains more than 9 digits.
-     * <p>
-     * Additional Points:
-     * Support for different phone phoneNumber formats (e.g., including hyphens, parentheses, or other separators).
-     * Implementation of a simple user interface allowing to enter a phone phoneNumber and display the validation result.
-     * <p>
-     * Expected Points:
-     * Code Quality: Is the code readable, well-formatted, and understandable?
-     * Correctness: Does the application correctly validate phone numbers according to the requirements?
-     * Flexibility: Does the application support different phone phoneNumber formats?
-     */
     private final static Pattern PHONE_NUMBER_PATTERN = Pattern.compile("^[0-9]{3}[-\\s]?[0-9]{3}[-\\s]?[0-9]{3}$");
 
     @Test

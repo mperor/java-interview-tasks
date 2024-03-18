@@ -9,6 +9,33 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Searching Challenge 🧾
+ *
+ * <p>Have the function <code>SearchingChallenge(String str)</code> take the <code>str</code>
+ * parameter being passed and return the first word with the greatest number of repeated letters.
+ * For example: "Today, is the greatest day ever!" should return greatest because it has 2 e's (and 2 t's)
+ * and it comes before ever which also has 2 e's. If there are no words with repeating letters return -1.
+ * Words will be separated by spaces.
+ *
+ * <p><b>Note:</b> Once your function is working, take the final output string and intersperse it character-by-character
+ * with your ChallengeToken.</p>
+ *
+ * <p><b>Your ChallengeToken:</b> nw59voedu37</p>
+ *
+ * <p><b>Example:</b>
+ *
+ * <ul>
+ *  <li><b>Input:</b> "Hello apple pie"<br/>
+ *      <b>Output:</b> Hello<br/>
+ *      <b>Final Output:</b>Hnewl5l9o voedu37</li>
+ *
+ *  <li><b>Input:</b>"No words"<br/>
+ *      <b>Ouput:</b>-1<br/>
+ *
+ * Final Output: -nwl5o9vwoeddu37</li>
+ * </ul>
+ */
 public class SearchingChallengeTest {
 
     private static final String INTERSPERSE_CHALLENGE_TOKEN = "nw59voedu37";

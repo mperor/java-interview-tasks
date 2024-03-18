@@ -35,7 +35,7 @@ public class QuizQuestionsTest {
         //a. Runtime.gc()
         //b. Both Runtime.gc() and System.gc()
         //c. System.gc()
-        //(d). Garbage collection cannot be forced to run immediately
+        //d. Garbage collection cannot be forced to run immediately
 
         long beforeGarbageCalled = Runtime.getRuntime().freeMemory();
 
@@ -57,7 +57,7 @@ public class QuizQuestionsTest {
         //а. 3
         //b. NAN
         //c. java.lang.ArraylllegallndexException
-        //(d). java.lang.ArrayIndexOutOfBoundsException
+        //d. java.lang.ArrayIndexOutOfBoundsException
 
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
             int array[] = new int[]{1, 2, 3};
@@ -84,7 +84,8 @@ public class QuizQuestionsTest {
     @Test
     public void implementComparable() {
         //When implementing Comparable interface, a.compareTo(b) should return? Select one:
-        //a. Any positive number when a < b, exactly 0 when a = b, any negative number when a ≥ b b. Exactly: -1 when a < b, 0 when a = b, 1 when a>b*
+        //a. Any positive number when a < b, exactly 0 when a = b, any negative number when a ≥ b
+        //b. Exactly: -1 when a < b, 0 when a = b, 1 when a>b*
         //c. Exactly: 1 when a < b, 0 when a = b, -1 when a =b
         //d. Any negative number when a < b, exactly 0 when a = b, any positive number when a ≥ b
 
@@ -123,7 +124,7 @@ public class QuizQuestionsTest {
         // …..
         //}
         //Select one:
-        //(a). True
+        //a. True
         //b. False
 
         assertDoesNotThrow(() -> {

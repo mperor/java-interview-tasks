@@ -7,6 +7,57 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The Wall 🧱
+ *
+ * <p>The task is to analyze the following code and implement the {@code findBlockByColor}, {@code findBlocksByMaterial}, count methods in the {@link Wall} class - preferably avoiding code duplication and placing all the logic in the Wall class.
+ * Taking into account in the analysis and implementation of the CompositeBlock interface!
+ *
+ * <p><strong>Source code:</strong></p>
+ * <pre>
+ * import java.util.List;
+ * import java.util.Optional;
+ *
+ * interface Structure {
+ *     // Returns any element with the specified color
+ *     Optional<Block> findBlockByColor(String color);
+ *
+ *     // Returns all elements made of the given material
+ *     List<Block> findBlocksByMaterial(String material);
+ *
+ *     // Returns the number of all elements forming the structure
+ *     int count();
+ * }
+ *
+ * public class Wall implements Structure {
+ *     private List<Block> blocks;
+ *
+ *     public Optional<Block> findBlockByColor(String color) {
+ *         // Method implementation
+ *         return null; // Change to appropriate implementation
+ *     }
+ *
+ *     public List<Block> findBlocksByMaterial(String material) {
+ *         // Method implementation
+ *         return null; // Change to appropriate implementation
+ *     }
+ *
+ *     public int count() {
+ *         // Method implementation
+ *         return 0; // Change to appropriate implementation
+ *     }
+ * }
+ *
+ * interface Block {
+ *     String getColor();
+ *     String getMaterial();
+ * }
+ *
+ * interface CompositeBlock extends Block {
+ *     List<Block> getBlocks();
+ * }
+ * </pre>
+ */
 class WallTest {
 
     private Structure structure;

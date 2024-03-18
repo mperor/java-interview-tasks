@@ -5,7 +5,31 @@ import org.junit.jupiter.api.Test;
 
 import java.util.function.Function;
 
-public class ArrayChallengeTest {
+/**
+ * Profit Challenge 🔢
+ *
+ * <p>Have the function <i>ArrayChallenge(arr)</i> take the array of numbers stored in {@code arr} which will contain integers that represent the amount in dollars that a single stock is worth,
+ * and return the maximum profit that could have been made by buying stock on day x and selling stock on day y where y>x.
+ *
+ * <p>For example: if {@code arr} is <i>[44, 30, 24, 32, 35, 30, 40, 38, 15]</i> then your program should return 16
+ * because at index 2 stock was worth $24 and at index 6 the stock was then worth $40, so if you bought the stock at 24 and sold it at 40,
+ * you would have made a profit of $16, which is the maximum profit that could have been made with this list of stock prices.
+ *
+ * <p>If there is no profit that could have been made with the stock prices, then your program should return -1.
+ * For example: {@code arr} is <i>[10, 9, 8, 2]</i> then your program should return -1.
+ *
+ * <p><b>Example:</b>
+ *
+ * <p>Input: <i>new int[] {10,12,4,5,9}</i>
+ * <p>Output: <i>5</i>
+ *
+ * <p>Input: <i>new int[] {14,20,4,12,5,11}</i>
+ * <p>Output: <i>8</i>
+ *
+ * <p>Input: <i>new int[] {44,30,24,32,35,30,40,38,15}</i>
+ * <p>Output: <i>16</i></p>
+ */
+public class ProfitChallengeTest {
 
     @Test
     public void testFindMaximumProfitNaiveWay() {

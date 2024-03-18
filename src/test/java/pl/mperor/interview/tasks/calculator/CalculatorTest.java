@@ -13,6 +13,38 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * Calculator Instructions 🧮
+ * <p><strong>Problem: Calculator</strong></p>
+ *
+ * <p>Write some code to calculate a result from a set of instructions.
+ * Instructions comprise of a keyword and a number that are separated by a space per line.
+ * Instructions are loaded from the file and results are output to the screen.
+ * Any number of Instructions can be specified. Instructions can be any binary operators of your choice (e.g., add, divide, subtract, multiply etc).
+ * The instructions will ignore mathematical precedence.
+ * The last instruction should be “apply” and a number (e.g., “apply 3”).
+ * The calculator is then initialised with that number and the previous instructions are applied to that number.</p>
+ *
+ *
+ * <p>Examples of the calculator lifecycle:
+ *
+ * <ul>
+ *     <li><b>Example 1</b>
+ *          <p>Input from file: add 2, multiply 3, apply 10
+ *          <p>Output: 36</p>
+ *          <p>Explanation: 10 + 2 * 3 = 36</p>
+ *     </li>
+ *     <li><b>Example 2</b>
+ *          <p>Input from file: multiply 3, add 2, apply 10</p>
+ *          <p>Output: 32</p>
+ *          <p>Explanation: 10 * 3 + 2 = 32</p>
+ *     </li>
+ *     <li><b>Example 3</b>
+ *          <p>Input from file: apply 1</p>
+ *          <p>Output: 1</p>
+ *     </li>
+ * </ul>
+ */
 public class CalculatorTest {
 
     private final InstructionParser parser = new InstructionParser();
@@ -51,7 +83,6 @@ public class CalculatorTest {
         Assertions.assertEquals(new BigDecimal(36), calculator.compute());
     }
 
-
     @Test
     public void calculateExample2StoredInTemporaryFile() {
         String input = "multiply 3\r\n" +
@@ -71,7 +102,6 @@ public class CalculatorTest {
         CalculatorEngine calculator = calculatorCreator.create(instructions);
         Assertions.assertEquals(new BigDecimal(10), calculator.compute());
     }
-
 
     private File createTmpFileWithText(String text) {
         try {
