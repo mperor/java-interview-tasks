@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -69,7 +70,6 @@ public class StringChallengeTest {
         assertEquals("3w1e1g2w1h", actual);
     }
 
-
     /**
      * <b>String Challenge 2</b>
      *
@@ -119,14 +119,14 @@ public class StringChallengeTest {
         UnaryOperator<String> builderReverser = string -> new StringBuilder(string).reverse().toString();
         UnaryOperator<String> charsReverser = string -> {
             char[] chars = string.toCharArray();
-            int left = 0;
-            int right = chars.length - 1;
-            while (left < right) {
-                char tmp = chars[left];
-                chars[left] = chars[right];
-                chars[right] = tmp;
-                right--;
-                left++;
+            int leftIndex = 0;
+            int rightIndex = chars.length - 1;
+            while (leftIndex < rightIndex) {
+                char tmp = chars[leftIndex];
+                chars[leftIndex] = chars[rightIndex];
+                chars[rightIndex] = tmp;
+                rightIndex--;
+                leftIndex++;
             }
             return String.valueOf(chars);
         };
@@ -166,6 +166,31 @@ public class StringChallengeTest {
                 .sorted()
                 .mapToObj(codePoint -> String.valueOf(Character.toChars(codePoint)))
                 .collect(Collectors.joining());
+    }
+
+    /**
+     * <b>String Challenge 5</b>
+     *
+     * <p>Write a program to check if a given string is a palindrome in Java.
+     */
+    @Test
+    public void testIsPalindrome() {
+        Predicate<String> palindromeChecker = text -> {
+            char[] chars = text.toCharArray();
+            int leftIndex = 0;
+            int rightIndex = chars.length - 1;
+            while (leftIndex < rightIndex) {
+                if (chars[leftIndex] != chars[rightIndex]) {
+                    return false;
+                }
+                leftIndex++;
+                rightIndex--;
+            }
+            return true;
+        };
+
+        assertTrue(palindromeChecker.test("level"));
+        assertFalse(palindromeChecker.test("loop"));
     }
 
 }
