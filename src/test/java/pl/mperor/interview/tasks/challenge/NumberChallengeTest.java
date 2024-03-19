@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -204,6 +205,31 @@ public class NumberChallengeTest {
 
         assertEquals(10, iterativeSecondLargestNumberFinder.apply(new int[]{1, 5, 10, 20}));
         assertEquals(-10, iterativeSecondLargestNumberFinder.apply(new int[]{-1, -10}));
+    }
+
+    /**
+     * <p><b>Number Challenge 7</b>
+     *
+     * <p>Write a program to find the nth Fibonacci number in Java.
+     */
+    @Test
+    public void testFindFibonacci() {
+        UnaryOperator<Integer> fibonacci = n -> Stream.iterate(new int[]{1, 1}, fib -> new int[]{fib[1], fib[0] + fib[1]})
+                .limit(n)
+                .reduce((first, second) -> second)
+                .orElse(new int[]{0})[0];
+
+        assertEquals(0, fibonacci.apply(0));
+        assertEquals(1, fibonacci.apply(1));
+        assertEquals(1, fibonacci.apply(2));
+        assertEquals(2, fibonacci.apply(3));
+        assertEquals(3, fibonacci.apply(4));
+        assertEquals(5, fibonacci.apply(5));
+        assertEquals(8, fibonacci.apply(6));
+        assertEquals(13, fibonacci.apply(7));
+        assertEquals(21, fibonacci.apply(8));
+        assertEquals(34, fibonacci.apply(9));
+        assertEquals(55, fibonacci.apply(10));
     }
 
 }
