@@ -9,12 +9,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * String Challenges 🔡
@@ -143,6 +144,28 @@ public class StringChallengeTest {
         assertEquals("sdrawkcab ekil skool txet siht woh rednow I", builderReverser.apply("I wonder how this text looks like backwards"));
         assertEquals("sdrawkcab ekil skool txet siht woh rednow I", charsReverser.apply("I wonder how this text looks like backwards"));
         assertEquals("👶👧👩👵💀🤖", unicodeSafeReverser.apply("🤖💀👵👩👧👶"));
+    }
+
+    /**
+     * <b>String Challenge 4</b>
+     *
+     * <p>Write a program to check if two strings are anagrams in Java.
+     */
+    @Test
+    public void testAreAnagrams() {
+        BiPredicate<String, String> anagramChecker = (first, second) -> sortByLetters(first).equals(sortByLetters(second));
+
+        assertTrue(anagramChecker.test("lore", "role"));
+        assertTrue(anagramChecker.test("listen", "silent"));
+        assertFalse(anagramChecker.test("good", "doom"));
+        assertFalse(anagramChecker.test("hello", "world"));
+    }
+
+    private static String sortByLetters(String string) {
+        return string.codePoints()
+                .sorted()
+                .mapToObj(codePoint -> String.valueOf(Character.toChars(codePoint)))
+                .collect(Collectors.joining());
     }
 
 }
