@@ -193,4 +193,18 @@ public class StringChallengeTest {
         assertFalse(palindromeChecker.test("loop"));
     }
 
+    /**
+     * <b>String Challenge 6</b>
+     *
+     * <p>Write a Java program to check if a vowel is present in a string.
+     */
+    @Test
+    public void testStringContainsVowel() {
+        Predicate<String> vowelChecker = string -> string
+                .toLowerCase().matches(".*[aeiou].*");
+
+        assertTrue(vowelChecker.test("Hello"));
+        assertFalse(vowelChecker.test("TV"));
+    }
+
 }
