@@ -208,5 +208,16 @@ public class QuizQuestionsTest {
         Assertions.assertEquals("Base class with integer a = 100", systemOut.toString());
     }
 
+    @Test
+    public void testSwapTwoNumbersWithoutUsingAThirdVariable() {
+        // How do you swap two numbers without using a third variable in Java??
+        int a = 1;
+        int b = 2;
+        b = b + a; // now b is sum of both the numbers
+        a = b - a; // b - a = (b + a) - a = b (a is swapped)
+        b = b - a; // (b + a) - b = a (b is swapped)
+        assertEquals(2, a);
+        assertEquals(1, b);
+    }
 
 }
