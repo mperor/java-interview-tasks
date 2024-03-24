@@ -16,6 +16,7 @@ are not the only possible solutions to these cases.
 5. [Max Car 🚗](src/test/java/pl/mperor/interview/tasks/car/CarTest.java)
 6. [Challenges 💪](src/test/java/pl/mperor/interview/tasks/challenge)
     * [Profit Challenge 💹](src/test/java/pl/mperor/interview/tasks/challenge/ProfitChallengeTest.java)
+    * [Matrix Challenge 🔢](src/test/java/pl/mperor/interview/tasks/challenge/MatrixChallengeTest.java)
     * [Searching Challenge 🧾](src/test/java/pl/mperor/interview/tasks/challenge/SearchingChallengeTest.java)
     * [String Challenges 🔡](src/test/java/pl/mperor/interview/tasks/challenge/StringChallengeTest.java)
     * [Number Challenges 🔢](src/test/java/pl/mperor/interview/tasks/challenge/NumberChallengeTest.java)
