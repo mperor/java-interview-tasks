@@ -232,4 +232,52 @@ public class NumberChallengeTest {
         assertEquals(55, fibonacci.apply(10));
     }
 
+    /**
+     * <p><b>Number Challenge 8</b>
+     *
+     * <p>Write a function <code>findMissing</code>, which takes an array of N integers ranging from 0 to N as an argument.
+     * All elements in the array are unique. There are N + 1 numbers in the range <0, N>. The array has a length of N.
+     * One element is missing from the range in the array. The findMissing function should return the missing element:
+     *
+     * <pre>
+     * array = [0, 2, 1, 4]
+     * findMissing(array) == 3
+     * </pre>
+     */
+    @Test
+    public void testFindMissing() {
+        Function<int[], Integer> orderedMissingFinder = array -> {
+            Arrays.sort(array);
+            for (int i = 0; i < array.length - 1; i++) {
+                if (array[i + 1] - array[i] == 2) {
+                    return (array[i] + array[i + 1]) / 2;
+                }
+            }
+            return -1;
+        };
+
+        Function<int[], Integer> arithmeticSequenceMissingFinder = array -> {
+            int arraySum = Arrays.stream(array).sum();
+            int sequenceSum = array.length * (array.length + 1) / 2;
+            return sequenceSum - arraySum;
+        };
+
+        Function<int[], Integer> memoryGreedyMissingFinder = array -> {
+            boolean[] flags = new boolean[array.length + 1];
+
+            for (int number : array) {
+                flags[number] = true;
+            }
+
+            for (int i = 0; i < flags.length; i++) {
+                if (!flags[i])
+                    return i;
+            }
+            return -1;
+        };
+
+        assertEquals(3, orderedMissingFinder.apply(new int[]{0, 2, 1, 4}));
+        assertEquals(3, arithmeticSequenceMissingFinder.apply(new int[]{0, 2, 1, 4}));
+        assertEquals(3, memoryGreedyMissingFinder.apply(new int[]{0, 2, 1, 4}));
+    }
 }
