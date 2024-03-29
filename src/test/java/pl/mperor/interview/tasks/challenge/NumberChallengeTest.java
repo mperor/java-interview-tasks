@@ -3,6 +3,7 @@ package pl.mperor.interview.tasks.challenge;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
@@ -279,5 +280,42 @@ public class NumberChallengeTest {
         assertEquals(3, orderedMissingFinder.apply(new int[]{0, 2, 1, 4}));
         assertEquals(3, arithmeticSequenceMissingFinder.apply(new int[]{0, 2, 1, 4}));
         assertEquals(3, memoryGreedyMissingFinder.apply(new int[]{0, 2, 1, 4}));
+    }
+
+    /**
+     * <p><b>Number Challenge 9</b>
+     *
+     * <p>Write a function isCyclic, which takes an arbitrarily large positive integer in the form of a string as an argument.
+     * The number can be preceded by zeros, so "0123" is a valid input to the program.
+     * The task is to write a function isCyclic, which will check if a given number is a cyclic number.</p>
+     *
+     * <pre>
+     * isCyclic("142857") == true
+     * isCyclic("012233") == false
+     * </pre>
+     *
+     * <p>In the example, the first number is a cyclic number.
+     * The second line shows an example for which isCyclic should return false.</p>
+     */
+    @Test
+    public void testIsCyclic() {
+        Predicate<String> naiveCyclicChecker = arg -> {
+            var number = new BigInteger(arg);
+            var normalizedString = number.toString();
+            int factor = 2;
+            String doubledString = normalizedString + normalizedString;
+
+            while (factor <= normalizedString.length()) {
+                BigInteger result = number.multiply(BigInteger.valueOf(factor));
+                String resultString = result.toString();
+                if (!doubledString.contains(resultString))
+                    return false;
+                factor++;
+            }
+            return true;
+        };
+
+        assertTrue(naiveCyclicChecker.test("142857"));
+        assertFalse(naiveCyclicChecker.test("012233"));
     }
 }
