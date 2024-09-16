@@ -1,5 +1,8 @@
 # JAVA Interview Tasks and Questions
 
+[![Java CI with Maven](https://github.com/mperor/java-interview-tasks/actions/workflows/maven.yml/badge.svg)](https://github.com/mperor/java-interview-tasks/actions/workflows/maven.yml)
+[![Test Results](https://gist.githubusercontent.com/mperor/8c7b2545d44372da8b8153cae323b205/raw/badge.svg)](src/test/java/pl/mperor/interview/tasks)
+
 This project contains a collection of tasks sourced from various online platforms under the name *"job interview
 questions"* or *"coding challenges for Java developers"*.
 The task descriptions are provided within the [test folder](src/test/java/pl/mperor/interview/tasks) as Javadoc comments
