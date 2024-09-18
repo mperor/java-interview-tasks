@@ -89,11 +89,16 @@ public class QuizQuestionsTest {
         //c. Exactly: 1 when a < b, 0 when a = b, -1 when a =b
         //d. Any negative number when a < b, exactly 0 when a = b, any positive number when a ≥ b
 
-        Comparable<Integer> comparable = i -> 0;
         Comparator<Integer> comparator = QuizQuestionsTest::compare;
         Assertions.assertEquals(-1, comparator.compare(1, 2));
         Assertions.assertEquals(0, comparator.compare(1, 1));
         Assertions.assertEquals(1, comparator.compare(2, 1));
+
+        Comparable<Integer> comparableZero = Integer.valueOf(0)::compareTo;
+        // under the hood 'compareTo' uses a static method: Integer.compare(a, b);
+        Assertions.assertEquals(-1, comparableZero.compareTo(1));
+        Assertions.assertEquals(0, comparableZero.compareTo(0));
+        Assertions.assertEquals(1, comparableZero.compareTo(-1));
     }
 
     private static int compare(int a, int b) {
