@@ -55,7 +55,7 @@ public class MatrixChallengeTest {
                     .toArray(int[][]::new);
 
             rows = matrix.length;
-            cols = matrix[0].length;
+            cols = rows == 0 ? 0 : matrix[0].length;
         }
 
         public int calculateArea() {
@@ -103,6 +103,11 @@ public class MatrixChallengeTest {
                 return new MatrixCell(rowIdx, colIdx);
             }
         }
+    }
+
+    @Test
+    public void testEmptyTableBehaviour() {
+        assertEquals(0, new MatrixCalculator(new String[]{}).calculateArea());
     }
 
     @Test
