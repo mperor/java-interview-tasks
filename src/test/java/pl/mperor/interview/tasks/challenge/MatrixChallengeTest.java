@@ -63,35 +63,45 @@ public class MatrixChallengeTest {
             for (int rowIdx = 0; rowIdx < rows; rowIdx++) {
                 for (int colIdx = 0; colIdx < cols; colIdx++) {
                     if (matrix[rowIdx][colIdx] == 1) {
-                        maxArea = Math.max(maxArea, findMaxAreaFromCell(rowIdx, colIdx));
+                        maxArea = Math.max(maxArea, findMaxAreaFromCell(MatrixCell.of(rowIdx, colIdx)));
                     }
                 }
             }
             return maxArea;
         }
 
-        private int findMaxAreaFromCell(int rowIdx, int colIdx) {
-            int width = calculateRowWidth(rowIdx, colIdx);
+        private int findMaxAreaFromCell(MatrixCell cell) {
+            int width = calculateRowWidth(cell);
 
-            int nextRowIdx = rowIdx + 1;
-            while (nextRowIdx < rows && calculateRowWidthUntil(nextRowIdx, colIdx, colIdx + width) == width) {
-                nextRowIdx++;
+            MatrixCell nextCell = cell.nextRowCell();
+            while (nextCell.rowIdx < rows && calculateRowWidthUntil(nextCell, cell.colIdx + width) == width) {
+                nextCell = nextCell.nextRowCell();
             }
 
-            int length = nextRowIdx - rowIdx;
+            int length = nextCell.rowIdx - cell.rowIdx;
             return width * length;
         }
 
-        private int calculateRowWidth(int rowIdx, int colIdx) {
-            return calculateRowWidthUntil(rowIdx, colIdx, cols);
+        private int calculateRowWidth(MatrixCell cell) {
+            return calculateRowWidthUntil(cell, cols);
         }
 
-        private int calculateRowWidthUntil(int rowIdx, int colIdx, int until) {
+        private int calculateRowWidthUntil(MatrixCell cell, int until) {
             int width = 0;
-            while (colIdx + width < until && matrix[rowIdx][colIdx + width] == 1) {
+            while (cell.colIdx + width < until && matrix[cell.rowIdx][cell.colIdx + width] == 1) {
                 width++;
             }
             return width;
+        }
+
+        private record MatrixCell(int rowIdx, int colIdx) {
+            public MatrixCell nextRowCell() {
+                return new MatrixCell(rowIdx + 1, colIdx);
+            }
+
+            public static MatrixCell of(int rowIdx, int colIdx) {
+                return new MatrixCell(rowIdx, colIdx);
+            }
         }
     }
 
