@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -248,6 +249,18 @@ public class QuizQuestionsTest {
         assertThrows(ArithmeticException.class, () -> {
             int ci = 0 / 0;
         });
+    }
+
+    @Test
+    public void testAlphabetRangeInAsciiTable() {
+        // What is the range of numbers in the ASCII table for the alphabet?
+        assertEquals(65, 'A');
+        assertEquals(90, 'Z');
+
+        assertEquals(97, 'a');
+        assertEquals(122, 'z');
+
+        assertEquals(26, IntStream.rangeClosed('a', 'z').count());
     }
 
 }
