@@ -223,7 +223,7 @@ public class QuizQuestionsTest {
         int a = 1;
         int b = 2;
         b = b + a; // now b is sum of both the numbers
-        a = b - a; // b - a = (b + a) - a = b (a is swapped)
+        a = b - a; // (b + a) - a = b (a is swapped)
         b = b - a; // (b + a) - b = a (b is swapped)
         assertEquals(2, a);
         assertEquals(1, b);
