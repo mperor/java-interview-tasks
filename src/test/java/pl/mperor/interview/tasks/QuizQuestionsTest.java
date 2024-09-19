@@ -75,10 +75,15 @@ public class QuizQuestionsTest {
         //a. True
         //b. False
 
-        assertTrue("Abc" == "Abc");
         String a = new String("Abc");
         String b = new String("Abc");
+
+        // equals vs '=='
+        assertTrue("Abc" == "Abc");
         assertFalse(a == b);
+
+        assertTrue("Abc".equals("Abc"));
+        assertTrue(a.equals(b));
     }
 
     @Test
