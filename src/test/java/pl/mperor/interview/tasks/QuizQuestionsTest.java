@@ -229,4 +229,25 @@ public class QuizQuestionsTest {
         assertEquals(1, b);
     }
 
+    @Test
+    public void testDivisionByZero() {
+        // What will be the output of the following Java statement?
+        double a = 3.0 / 0;
+        double b = 0 / 4.0;
+        double c = 0 / 0.0;
+
+        // double vs int
+        assertTrue(Double.isInfinite(a));
+        assertEquals(0, b);
+        assertTrue(Double.isNaN(c));
+
+        assertThrows(ArithmeticException.class, () -> {
+            int ai = 3 / 0;
+        });
+        assertEquals(0, 0 / 4);
+        assertThrows(ArithmeticException.class, () -> {
+            int ci = 0 / 0;
+        });
+    }
+
 }
