@@ -1,7 +1,6 @@
 package pl.mperor.interview.tasks;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -75,10 +74,15 @@ public class QuizQuestionsTest {
         //a. True
         //b. False
 
-        assertTrue("Abc" == "Abc");
         String a = new String("Abc");
         String b = new String("Abc");
+
+        // equals vs '=='
+        assertTrue("Abc" == "Abc");
         assertFalse(a == b);
+
+        assertTrue("Abc".equals("Abc"));
+        assertTrue(a.equals(b));
     }
 
     @Test
@@ -89,11 +93,16 @@ public class QuizQuestionsTest {
         //c. Exactly: 1 when a < b, 0 when a = b, -1 when a =b
         //d. Any negative number when a < b, exactly 0 when a = b, any positive number when a ≥ b
 
-        Comparable<Integer> comparable = i -> 0;
         Comparator<Integer> comparator = QuizQuestionsTest::compare;
-        Assertions.assertEquals(-1, comparator.compare(1, 2));
-        Assertions.assertEquals(0, comparator.compare(1, 1));
-        Assertions.assertEquals(1, comparator.compare(2, 1));
+        assertEquals(-1, comparator.compare(1, 2));
+        assertEquals(0, comparator.compare(1, 1));
+        assertEquals(1, comparator.compare(2, 1));
+
+        Comparable<Integer> comparableZero = Integer.valueOf(0)::compareTo;
+        // under the hood 'compareTo' uses a static method: Integer.compare(a, b);
+        assertEquals(-1, comparableZero.compareTo(1));
+        assertEquals(0, comparableZero.compareTo(0));
+        assertEquals(1, comparableZero.compareTo(-1));
     }
 
     private static int compare(int a, int b) {
@@ -113,7 +122,7 @@ public class QuizQuestionsTest {
             case 0:
                 break;
             default:
-                Assertions.fail("Default block was called!");
+                fail("Default block was called!");
         }
     }
 
@@ -153,7 +162,7 @@ public class QuizQuestionsTest {
         Ferrari f = new Ferrari();
         f.run();
 
-        Assertions.assertEquals("running at 200kmph", systemOut.toString());
+        assertEquals("running at 200kmph", systemOut.toString());
     }
 
     @Test
@@ -167,8 +176,8 @@ public class QuizQuestionsTest {
         //c. 2+4
         //d. 6
 
-        Assertions.assertEquals(6, nums[1] + nums[3]);
-        Assertions.assertEquals("6", systemOut.toString());
+        assertEquals(6, nums[1] + nums[3]);
+        assertEquals("6", systemOut.toString());
     }
 
     @Test
@@ -181,8 +190,8 @@ public class QuizQuestionsTest {
         //c. Object object
         //d. Object class
 
-        Assertions.assertInstanceOf(Object.class, object);
-        Assertions.assertInstanceOf(Class.class, object.getClass());
+        assertInstanceOf(Object.class, object);
+        assertInstanceOf(Class.class, object.getClass());
     }
 
     @Test
@@ -205,7 +214,7 @@ public class QuizQuestionsTest {
         }
 
         new Child().method(100);
-        Assertions.assertEquals("Base class with integer a = 100", systemOut.toString());
+        assertEquals("Base class with integer a = 100", systemOut.toString());
     }
 
     @Test
@@ -214,7 +223,7 @@ public class QuizQuestionsTest {
         int a = 1;
         int b = 2;
         b = b + a; // now b is sum of both the numbers
-        a = b - a; // b - a = (b + a) - a = b (a is swapped)
+        a = b - a; // (b + a) - a = b (a is swapped)
         b = b - a; // (b + a) - b = a (b is swapped)
         assertEquals(2, a);
         assertEquals(1, b);
