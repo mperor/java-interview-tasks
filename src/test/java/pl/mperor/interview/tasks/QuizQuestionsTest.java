@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -227,6 +228,39 @@ public class QuizQuestionsTest {
         b = b - a; // (b + a) - b = a (b is swapped)
         assertEquals(2, a);
         assertEquals(1, b);
+    }
+
+    @Test
+    public void testDivisionByZero() {
+        // What will be the output of the following Java statement?
+        double a = 3.0 / 0;
+        double b = 0 / 4.0;
+        double c = 0 / 0.0;
+
+        // double vs int
+        assertTrue(Double.isInfinite(a));
+        assertEquals(0, b);
+        assertTrue(Double.isNaN(c));
+
+        assertThrows(ArithmeticException.class, () -> {
+            int ai = 3 / 0;
+        });
+        assertEquals(0, 0 / 4);
+        assertThrows(ArithmeticException.class, () -> {
+            int ci = 0 / 0;
+        });
+    }
+
+    @Test
+    public void testAlphabetRangeInAsciiTable() {
+        // What is the range of numbers in the ASCII table for the alphabet?
+        assertEquals(65, 'A');
+        assertEquals(90, 'Z');
+
+        assertEquals(97, 'a');
+        assertEquals(122, 'z');
+
+        assertEquals(26, IntStream.rangeClosed('a', 'z').count());
     }
 
 }
