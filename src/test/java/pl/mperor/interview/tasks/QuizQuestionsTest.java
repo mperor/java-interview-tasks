@@ -272,5 +272,4 @@ public class QuizQuestionsTest {
         assertEquals(new BigDecimal("0.01"), new BigDecimal("0.03").subtract(new BigDecimal("0.02")));
         assertNotEquals(0.01, 0.3, 0.2);
     }
-
 }
