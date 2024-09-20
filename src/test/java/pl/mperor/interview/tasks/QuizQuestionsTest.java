@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.IntStream;
@@ -261,6 +262,15 @@ public class QuizQuestionsTest {
         assertEquals(122, 'z');
 
         assertEquals(26, IntStream.rangeClosed('a', 'z').count());
+    }
+
+    @Test
+    public void testDoubleValuePrecision() {
+        // What is the advantage of BigDecimal over double?
+
+        // BigDecimal offers more precision with control over rounding, but double is faster in terms of performance.
+        assertEquals(new BigDecimal("0.01"), new BigDecimal("0.03").subtract(new BigDecimal("0.02")));
+        assertNotEquals(0.01, 0.3, 0.2);
     }
 
 }
