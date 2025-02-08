@@ -301,4 +301,13 @@ public class QuizQuestionsTest {
             return false;
         }
     }
+
+    @Test
+    public void testThrowableInheritanceHierarchy() {
+        // What is the inheritance hierarchy for the Throwable class in Java?
+
+        assertInstanceOf(Throwable.class, new Exception());
+        assertInstanceOf(Throwable.class, new Error());
+        assertInstanceOf(Exception.class, new RuntimeException());
+    }
 }
