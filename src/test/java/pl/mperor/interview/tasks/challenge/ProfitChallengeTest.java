@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.function.Function;
 
 /**
- * Profit Challenge 🔢
+ * Profit Challenge 💹
  *
  * <p>Have the function <i>ArrayChallenge(arr)</i> take the array of numbers stored in {@code arr} which will contain integers that represent the amount in dollars that a single stock is worth,
  * and return the maximum profit that could have been made by buying stock on day x and selling stock on day y where y>x.

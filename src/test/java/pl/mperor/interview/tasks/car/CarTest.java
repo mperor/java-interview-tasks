@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Class Car
+ * Class Car 🚗
  *
  * <p>This class represents a Car with a maxSpeed and acceleration.
  *

@@ -13,6 +13,9 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Quiz Questions ❔
+ */
 public class QuizQuestionsTest {
 
     private PrintStream original = System.out;
@@ -91,8 +94,8 @@ public class QuizQuestionsTest {
     public void implementComparable() {
         //When implementing Comparable interface, a.compareTo(b) should return? Select one:
         //a. Any positive number when a < b, exactly 0 when a = b, any negative number when a ≥ b
-        //b. Exactly: -1 when a < b, 0 when a = b, 1 when a>b*
-        //c. Exactly: 1 when a < b, 0 when a = b, -1 when a =b
+        //b. Exactly: -1 when a < b, 0 when a = b, 1 when a>b
+        //c. Exactly: 1 when a < b, 0 when a = b, -1 when a>b
         //d. Any negative number when a < b, exactly 0 when a = b, any positive number when a ≥ b
 
         Comparator<Integer> comparator = QuizQuestionsTest::compare;
@@ -270,7 +273,32 @@ public class QuizQuestionsTest {
 
         // BigDecimal offers more precision with control over rounding, but double is faster in terms of performance.
         assertEquals(new BigDecimal("0.01"), new BigDecimal("0.03").subtract(new BigDecimal("0.02")));
-        assertNotEquals(0.01, 0.3, 0.2);
+        assertNotEquals(0.01, 0.03 - 0.02);
     }
 
+    @Test
+    public void testFinallyClauseHandling() {
+        // Which block will return the value: try, catch, or finally? And what is the result?"
+
+        assertFalse(finallyVsTry());
+        assertFalse(finallyVsTryCatch());
+    }
+
+    public boolean finallyVsTryCatch() {
+        try {
+            throw new IllegalStateException();
+        } catch (Exception exception) {
+            return true;
+        } finally {
+            return false;
+        }
+    }
+
+    public boolean finallyVsTry() {
+        try {
+            return true;
+        } finally {
+            return false;
+        }
+    }
 }

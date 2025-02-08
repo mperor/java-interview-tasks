@@ -7,7 +7,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * <h2>Matrix Challenge</h2>
+ * <h2>Matrix Challenge 🔢</h2>
  * <p>
  * The function <code>MatrixChallenge(strArr: String[]): number</code> takes the <code>strArr</code> parameter being passed which will be a 2D matrix of 0's and 1's, and determines the area of the largest rectangular submatrix that contains all 1's.
  * </p>

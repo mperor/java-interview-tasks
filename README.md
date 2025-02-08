@@ -1,4 +1,4 @@
-# JAVA Interview Tasks and Questions
+# JAVA Interview Tasks and Questions 🧩
 
 [![Java CI with Maven](https://github.com/mperor/java-interview-tasks/actions/workflows/maven.yml/badge.svg)](https://github.com/mperor/java-interview-tasks/actions/workflows/maven.yml)
 [![Test Results](https://gist.githubusercontent.com/mperor/8c7b2545d44372da8b8153cae323b205/raw/badge.svg)](src/test/java/pl/mperor/interview/tasks)
@@ -10,7 +10,7 @@ above the test classes. Smaller tasks are organized within composite test classe
 The solutions to the tasks are illustrative in nature, often in the form of experimenting with a given concept, and they
 are not the only possible solutions to these cases.
 
-## Tasks
+## Tasks ✏️
 
 1. [Phone Number Validation 📞](src/test/java/pl/mperor/interview/tasks/validator/PhoneNumberValidatorTest.java)
 2. [Coin Machine 🏦](src/test/java/pl/mperor/interview/tasks/coin/CoinMachineTest.java)
@@ -25,8 +25,9 @@ are not the only possible solutions to these cases.
     * [Number Challenges 🔢](src/test/java/pl/mperor/interview/tasks/challenge/NumberChallengeTest.java)
 7. [Quiz Questions ❔](src/test/java/pl/mperor/interview/tasks/QuizQuestionsTest.java)
 
-## Sources
+## Sources 🔗
 
-- [JAVA READY](https://javaready.pl/)
-- [Samouczek Programisty](https://www.samouczekprogramisty.pl/strefa-zadaniowa/)
-- [Java Coding Interview Questions and Solutions (Diptendu Das)](https://diptendud.medium.com/java-coding-interview-questions-and-solutions-8eae5cca91d)
+- [Samouczek Programisty 🧠](https://www.samouczekprogramisty.pl/strefa-zadaniowa/)
+- [Java Coding Interview Questions and Solutions (Diptendu Das) 💬](https://diptendud.medium.com/java-coding-interview-questions-and-solutions-8eae5cca91d)
+- [Java Senior Quiz 🎞️](https://youtube.com/playlist?list=PLO5muTI694A5yRrEDNY1czqEUVbYHG_AH&si=KteWFowVcOSTQ8F-)
+- [JAVA READY ®️](https://javaready.pl/)
