@@ -310,4 +310,12 @@ public class QuizQuestionsTest {
         assertInstanceOf(Throwable.class, new Error());
         assertInstanceOf(Exception.class, new RuntimeException());
     }
+
+    @Test
+    public void testInstanceofIsNull() {
+        // Is instanceof null check necessary? What happens if null is passed?"
+
+        assertFalse(null instanceof Object);
+        assertTrue("null" instanceof Object);
+    }
 }
