@@ -1,12 +1,13 @@
 package pl.mperor.interview.tasks;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.math.BigDecimal;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.IntStream;
@@ -317,5 +318,37 @@ public class QuizQuestionsTest {
 
         assertFalse(null instanceof Object);
         assertTrue("null" instanceof Object);
+    }
+
+    @Test
+    public void testStaticFieldsSerialization() throws IOException, ClassNotFoundException {
+        // Can static variables be serialized in Java?
+
+        var example = new Example(1);
+        var file = Files.createTempFile("example", ".dat").toFile();
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            oos.writeObject(example);
+        }
+
+        // Changes
+        example.instanceVar = 2;
+        Example.staticVar = 20;
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            Example deserialized = (Example) ois.readObject();
+            Assertions.assertEquals(1, deserialized.instanceVar);
+            Assertions.assertEquals(20, deserialized.staticVar, "Static variables are not serialized");
+        }
+    }
+
+    static class Example implements Serializable {
+        @Serial
+        private static final long serialVersionUID = 1L;
+        private static int staticVar = 10;
+        private int instanceVar;
+
+        Example(int instanceVar) {
+            this.instanceVar = instanceVar;
+        }
     }
 }
