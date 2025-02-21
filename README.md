@@ -24,6 +24,7 @@ are not the only possible solutions to these cases.
     * [String Challenges 🔡](src/test/java/pl/mperor/interview/tasks/challenge/StringChallengeTest.java)
     * [Number Challenges 🔢](src/test/java/pl/mperor/interview/tasks/challenge/NumberChallengeTest.java)
 7. [Quiz Questions ❔](src/test/java/pl/mperor/interview/tasks/QuizQuestionsTest.java)
+8. [Wolf 🐕 & Sheep 🐑](src/test/java/pl/mperor/interview/tasks/exception/WolfFullAndSheepWholeTest.java)
 
 ## Sources 🔗
 
