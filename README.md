@@ -26,6 +26,7 @@ are not the only possible solutions to these cases.
 7. [Quiz Questions ❔](src/test/java/pl/mperor/interview/tasks/QuizQuestionsTest.java)
 8. [Wolf 🐺 & Sheep 🐑](src/test/java/pl/mperor/interview/tasks/exception/WolfFullAndSheepWholeTest.java)
 9. [Player Ranking System 🏆](src/test/java/pl/mperor/interview/tasks/ranking/PlayerRankingSystemTest.java)
+10. [Simple Linked List 🔗](src/test/java/pl/mperor/interview/tasks/list/SimpleLinkedListTest.java)
 
 ## Sources 🔗
 
