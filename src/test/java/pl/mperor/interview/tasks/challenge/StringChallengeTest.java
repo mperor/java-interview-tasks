@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -205,6 +206,50 @@ public class StringChallengeTest {
 
         assertTrue(vowelChecker.test("Hello"));
         assertFalse(vowelChecker.test("TV"));
+    }
+
+    /**
+     * <b>String Challenge 7</b>
+     *
+     * <p>Implement your own Caesar cipher which allows to encrypt and decrypt a text with a given key (shift).
+     * The cipher should support both lower case and upper case letters (based on ASCII codes)
+     * and leave all other characters unchanged. Try to avoid code duplication.
+     *
+     * <pre>
+     * encrypt("ABCabc", 1) == "BCDbcd"
+     * encrypt("ABCabc", 25) == "ZABzab"
+     * decrypt("BCDbcd", 1) == "ABCabc"
+     * </pre>
+     */
+    @Test
+    public void testCaesarCipher() {
+        BiFunction<String, Integer, String> encrypt = (text, key) -> text.chars()
+                .map(c -> shiftLetter((char) c, key))
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+        BiFunction<String, Integer, String> decrypt = (secret, key) -> encrypt.apply(secret, -key);
+
+        assertEquals("ABCabc", encrypt.apply("ABCabc", 0));
+        assertEquals("BCDbcd", encrypt.apply("ABCabc", 1));
+        assertEquals("ZABzab", encrypt.apply("ABCabc", 25));
+        assertEquals("CDEcde", encrypt.apply("ABCabc", 28));
+        assertEquals("ABCabc", encrypt.apply("BCDbcd", -1));
+        assertEquals("Khoor, Zruog!", encrypt.apply("Hello, World!", 3));
+
+        assertEquals("ABCabc", decrypt.apply("ABCabc", 0));
+        assertEquals("ABCabc", decrypt.apply("BCDbcd", 1));
+        assertEquals("ABCabc", decrypt.apply("ZABzab", 25));
+        assertEquals("ABCabc", decrypt.apply("CDEcde", 28));
+        assertEquals("BCDbcd", decrypt.apply("ABCabc", -1));
+        assertEquals("Hello, World!", decrypt.apply(encrypt.apply("Hello, World!", 13), 13));
+    }
+
+    private static char shiftLetter(char letter, int key) {
+        if (letter >= 'A' && letter <= 'Z')
+            return (char) ('A' + Math.floorMod(letter - 'A' + key, 26));
+        if (letter >= 'a' && letter <= 'z')
+            return (char) ('a' + Math.floorMod(letter - 'a' + key, 26));
+        return letter;
     }
 
 }
