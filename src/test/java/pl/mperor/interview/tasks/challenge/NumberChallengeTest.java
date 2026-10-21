@@ -8,7 +8,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
@@ -317,5 +319,94 @@ public class NumberChallengeTest {
 
         assertTrue(naiveCyclicChecker.test("142857"));
         assertFalse(naiveCyclicChecker.test("012233"));
+    }
+
+    /**
+     * <p><b>Number Challenge 10</b>
+     *
+     * <p>Implement the Euclidean algorithm which finds the greatest common factor (GCF) of two positive numbers.
+     * Use iteration or recursion. Try to implement the extended version of this algorithm as well,
+     * which additionally finds the Bézout coefficients <code>x</code> and <code>y</code> such that:
+     *
+     * <pre>
+     * a * x + b * y == gcf(a, b)
+     * </pre>
+     */
+    @Test
+    public void testGreatestCommonFactor() {
+        IntBinaryOperator subtractionGcf = (a, b) -> {
+            validatePositive(a, b);
+            while (a != b) {
+                if (a > b) {
+                    a -= b;
+                } else {
+                    b -= a;
+                }
+            }
+            return a;
+        };
+        IntBinaryOperator iterativeDivisionGcf = (a, b) -> {
+            validatePositive(a, b);
+            while (b != 0) {
+                int remainder = a % b;
+                a = b;
+                b = remainder;
+            }
+            return a;
+        };
+        IntBinaryOperator recursiveDivisionGcf = (a, b) -> {
+            validatePositive(a, b);
+            return recursiveGcf(a, b);
+        };
+
+        for (IntBinaryOperator gcf : List.of(subtractionGcf, iterativeDivisionGcf, recursiveDivisionGcf)) {
+            assertEquals(1, gcf.applyAsInt(1, 1));
+            assertEquals(2, gcf.applyAsInt(4, 2));
+            assertEquals(2, gcf.applyAsInt(2, 4));
+            assertEquals(5, gcf.applyAsInt(20, 35));
+            assertEquals(5, gcf.applyAsInt(35, 20));
+            assertEquals(21, gcf.applyAsInt(1071, 462));
+            assertEquals(21, gcf.applyAsInt(462, 1071));
+            assertEquals(300, gcf.applyAsInt(300, 600));
+            assertThrows(IllegalArgumentException.class, () -> gcf.applyAsInt(0, 1));
+            assertThrows(IllegalArgumentException.class, () -> gcf.applyAsInt(1, -1));
+        }
+    }
+
+    @Test
+    public void testExtendedGreatestCommonFactor() {
+        assertArrayEquals(new int[]{1, 0, 1}, extendedGcf(1, 1));
+        assertArrayEquals(new int[]{4, -1, 16}, extendedGcf(188, 12));
+        assertArrayEquals(new int[]{4, 16, -1}, extendedGcf(12, 188));
+        assertArrayEquals(new int[]{10, 1, -1}, extendedGcf(30, 20));
+        assertArrayEquals(new int[]{10, -1, 1}, extendedGcf(20, 30));
+
+        int[][] inputs = {{1071, 462}, {462, 1071}, {300, 600}, {17, 5}, {240, 46}};
+        for (int[] input : inputs) {
+            int a = input[0], b = input[1];
+            int[] result = extendedGcf(a, b);
+            assertEquals(recursiveGcf(a, b), result[0]);
+            assertEquals(result[0], a * result[1] + b * result[2], "Bézout's identity");
+        }
+    }
+
+    private static int recursiveGcf(int a, int b) {
+        return b == 0 ? a : recursiveGcf(b, a % b);
+    }
+
+    /**
+     * @return array of {gcf, x, y} where {@code a * x + b * y == gcf}
+     */
+    private static int[] extendedGcf(int a, int b) {
+        if (b == 0)
+            return new int[]{a, 1, 0};
+
+        int[] next = extendedGcf(b, a % b);
+        return new int[]{next[0], next[2], next[1] - (a / b) * next[2]};
+    }
+
+    private static void validatePositive(int a, int b) {
+        if (a <= 0 || b <= 0)
+            throw new IllegalArgumentException("Input numbers must be positive!");
     }
 }
